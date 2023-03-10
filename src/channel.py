@@ -25,5 +25,4 @@ class Channel:
         """
         Выводит в консоль информацию о канале.
         """
-        pass
-
+        print(json.dumps(self.printout, indent=2, ensure_ascii=False))
