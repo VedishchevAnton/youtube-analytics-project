@@ -35,3 +35,10 @@ class Channel:
         Класс-метод, возвращающий объект для работы с YouTube API
         """
         return cls.youtube
+
+    def to_json(self, file_name: str) -> None:
+        """
+        Метод, сохраняющий в файл значения атрибутов экземпляра `Channel`
+        """
+        with open(file_name, 'w', encoding='utf-8') as file_json:
+            json.dump(self.__dict__, file_json, ensure_ascii=False)
