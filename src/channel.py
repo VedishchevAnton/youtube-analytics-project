@@ -5,15 +5,13 @@ from googleapiclient.discovery import build
 
 class Channel:
     """Класс для ютуб-канала"""
-    __channel_id = None
     api_key = os.environ.get('API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
-    def __init__(self, channel_id: str) -> None:
+    def __init__(self, channel_id: str):
         """
         Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API.
         """
-        self.channel_id = None
         self.__channel_id = channel_id
         self.channel = self.youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         self.title = self.channel['items'][0]['snippet']['title']
@@ -24,8 +22,12 @@ class Channel:
         """
         Выводит в консоль информацию о канале.
         """
-        printout = Channel.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
+        printout = Channel.youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         print(json.dumps(printout, indent=2, ensure_ascii=False))
+
+    @property
+    def channel__id(self):
+        return self.__channel_id
 
     @classmethod
     def get_service(cls):
@@ -33,4 +35,3 @@ class Channel:
         Класс-метод, возвращающий объект для работы с YouTube API
         """
         return cls.youtube
-
