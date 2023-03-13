@@ -26,7 +26,7 @@ class Channel:
         print(json.dumps(printout, indent=2, ensure_ascii=False))
 
     @property
-    def channel__id(self):
+    def channel_id(self):
         return self.__channel_id
 
     @classmethod
