@@ -5,6 +5,7 @@ from googleapiclient.discovery import build
 
 class Channel:
     """Класс для ютуб-канала"""
+    __channel_id = None
     api_key = os.environ.get('API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -25,3 +26,11 @@ class Channel:
         """
         printout = Channel.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         print(json.dumps(printout, indent=2, ensure_ascii=False))
+
+    @classmethod
+    def get_service(cls):
+        """
+        Класс-метод, возвращающий объект для работы с YouTube API
+        """
+        return cls.youtube
+
