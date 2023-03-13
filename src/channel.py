@@ -12,11 +12,16 @@ class Channel:
         """
         Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API.
         """
-        self.channel_id = channel_id
+        self.channel_id = None
+        self.__channel_id = channel_id
+        self.channel = self.youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
+        self.title = self.channel['items'][0]['snippet']['title']
+        self.video_count = self.channel['items'][0]['statistics']['videoCount']
+        self.url = f'https://www.youtube.com/channel/{self.__channel_id}'
 
     def print_info(self) -> None:
         """
         Выводит в консоль информацию о канале.
         """
-        printout = self.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
+        printout = Channel.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         print(json.dumps(printout, indent=2, ensure_ascii=False))
