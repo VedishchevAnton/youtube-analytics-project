@@ -22,9 +22,7 @@ class Channel:
         """
         Выводит в консоль информацию о канале.
         """
-        printout = Channel.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
-        print(json.dumps(printout, indent=2, ensure_ascii=False))
-
+        print(json.dumps(self.channel, indent=2, ensure_ascii=False))
 
     @classmethod
     def get_service(cls):
