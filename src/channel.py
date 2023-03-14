@@ -63,5 +63,11 @@ class Channel:
         """
         return int(self.view_count) - int(other.view_count)
 
+    def __rsub__(self, other):
+        """
+        Магический метод отраженного вычитания ( сравнение кол-во подписчиков)
+        """
+        return int(other.view_count) - int(self.view_count)
+
 
 
