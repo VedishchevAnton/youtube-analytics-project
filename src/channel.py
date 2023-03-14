@@ -54,4 +54,8 @@ class Channel:
     def __add__(self, other):
         return self.view_count + other.view_count
 
+    def __sub__(self, other):
+        return int(self.view_count) - int(other.view_count)
+
+
 
