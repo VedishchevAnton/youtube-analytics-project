@@ -52,9 +52,15 @@ class Channel:
         return f"{self.title} ({self.url})"
 
     def __add__(self, other):
-        return self.view_count + other.view_count
+        """
+        Магический метод для сложения (сравнения кол-во подписчиков)
+        """
+        return int(self.view_count) + int(other.view_count)
 
     def __sub__(self, other):
+        """
+        Магический метод для вычитания (сравнение кол-во подписчиков)
+        """
         return int(self.view_count) - int(other.view_count)
 
 
