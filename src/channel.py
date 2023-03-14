@@ -51,4 +51,7 @@ class Channel:
     def __str__(self):
         return f"{self.title} ({self.url})"
 
+    def __add__(self, other):
+        return self.view_count + other.view_count
+
 
