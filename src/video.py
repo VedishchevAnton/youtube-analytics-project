@@ -1,5 +1,9 @@
 import os
 from googleapiclient.discovery import build
+from dotenv import load_dotenv
+from setting import ENV_FILE
+
+load_dotenv(ENV_FILE)
 
 
 class Video:
