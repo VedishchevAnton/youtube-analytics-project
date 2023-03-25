@@ -2,6 +2,7 @@ import os
 from googleapiclient.discovery import build
 from datetime import timedelta
 import isodate
+import operator
 
 
 class PlayList:
@@ -18,9 +19,9 @@ class PlayList:
                                                                      part='contentDetails',
                                                                      maxResults=50,
                                                                      ).execute()
-        self.video_ids: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
+        self.video_id: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
         self.video_response = PlayList.youtube.videos().list(part='contentDetails,statistics',
-                                                             id=','.join(self.video_ids)
+                                                             id=','.join(self.video_id)
                                                              ).execute()
 
     @property
@@ -44,3 +45,14 @@ class PlayList:
             duration = isodate.parse_duration(iso_8601)
             total_duration += duration
         return total_duration
+
+    @property
+    def show_best_video(self):
+        """
+        Метод возвращает ссылку на самое популярное видео из плейлиста (по количеству лайков)
+        """
+        global best_video
+        for video in self.video_response['items']:
+            dict_like = {video['id']: int(video['statistics']['likeCount'])}
+            best_video = max(dict_like.items(), key=operator.itemgetter(1))
+        return f"https://youtu.be/{best_video[0]}"
