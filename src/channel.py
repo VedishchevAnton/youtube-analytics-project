@@ -1,6 +1,10 @@
 import json
 import os
 from googleapiclient.discovery import build
+from dotenv import load_dotenv
+from setting import ENV_FILE
+
+load_dotenv(ENV_FILE)
 
 
 class Channel:
@@ -74,7 +78,3 @@ class Channel:
         Магический метод для сравнения >= (сравнение кол-во подписчиков
         """
         return int(self.view_count) >= int(other.view_count)
-
-
-
-
