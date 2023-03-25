@@ -3,10 +3,6 @@ from googleapiclient.discovery import build
 from datetime import timedelta
 import isodate
 import operator
-from dotenv import load_dotenv
-from setting import ENV_FILE
-
-load_dotenv(ENV_FILE)
 
 
 class PlayList:
